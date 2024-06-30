@@ -12,8 +12,11 @@ class subinfo(info.infoclass):
         self.versionInfo.setDefaultValues(gitUrl="https://github.com/I-dont-need-name/StoneEX.git")
         self.displayName = "StoneEX"
         self.description = "Stone exhibition management"
+        self.svnTargets["master"] = "https://github.com/I-dont-need-name/StoneEX.git"
+        self.defaultTarget = "main"
 
     def setDependencies(self):
+        self.buildDependencies["virtual/base"] = None
         self.runtimeDependencies["virtual/base"] = None
         self.runtimeDependencies["libs/qt/qtbase"] = None
         #self.runtimeDependencies["libs/qt/qtsql"] = None
@@ -39,8 +42,8 @@ class subinfo(info.infoclass):
 class Package(CMakePackageBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.subinfo.options.configure.args += ["-DBUILD_PLASMOID=OFF"]
-        self.blacklist_file.append(self.blueprintDir() / "blacklist.txt")
+        #self.subinfo.options.configure.args += ["-DBUILD_PLASMOID=OFF"]
+        #self.blacklist_file.append(self.blueprintDir() / "blacklist.txt")
 
     def createPackage(self):
         self.defines["executable"] = r"bin\stoneex"
